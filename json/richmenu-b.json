@@ -1,7 +1,7 @@
 {
   "size": {
-    "width": 1080,
-    "height": 1080
+    "width": 2500,
+    "height": 843
   },
   "selected": false,
   "name": "Tab B",
@@ -11,8 +11,8 @@
       "bounds": {
         "x": 0,
         "y": 0,
-        "width": 540,
-        "height": 1080
+        "width": 833,
+        "height": 843
       },
       "action": {
         "type": "richmenuswitch",
@@ -22,15 +22,28 @@
     },
     {
       "bounds": {
-        "x": 540,
+        "x": 833,
         "y": 0,
-        "width": 540,
-        "height": 1080
+        "width": 833,
+        "height": 843
       },
       "action": {
         "type": "richmenuswitch",
         "richMenuAliasId": "menu-b",
         "data": "switch-to-b"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1666,
+        "y": 0,
+        "width": 834,
+        "height": 843
+      },
+      "action": {
+        "type": "richmenuswitch",
+        "richMenuAliasId": "menu-c",
+        "data": "switch-to-c"
       }
     }
   ]

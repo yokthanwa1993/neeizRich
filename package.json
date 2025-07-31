@@ -12,7 +12,8 @@
     "test": "node scripts/test-richmenu.js",
     "deploy": "node scripts/create-richmenus.js && node scripts/upload-images.js && node scripts/link-to-user.js",
     "samples": "node scripts/create-sample-images.js",
-    "simple": "node scripts/create-simple-images.js"
+    "simple": "node scripts/create-simple-images.js",
+    "webhook": "node webhook-server.js"
   },
   "keywords": [
     "line",

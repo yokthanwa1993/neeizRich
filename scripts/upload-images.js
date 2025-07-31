@@ -13,7 +13,7 @@ require('dotenv').config({ path: './config/config.env' });
 async function uploadImages() {
     const lineAPI = new LineAPI();
     
-    console.log('🖼️ เริ่มอัปโหลดรูปภาพ Rich Menu...\n');
+    console.log('🖼️ เริ่มอัปโหลดรูปภาพ Rich Menu (2 แท็บ)...\n');
     
     try {
         // โหลด Rich Menu IDs
