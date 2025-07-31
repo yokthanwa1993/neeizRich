@@ -1,0 +1,37 @@
+{
+  "size": {
+    "width": 1080,
+    "height": 1080
+  },
+  "selected": false,
+  "name": "Tab A",
+  "chatBarText": "เมนู A",
+  "areas": [
+    {
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 540,
+        "height": 1080
+      },
+      "action": {
+        "type": "richmenuswitch",
+        "richMenuAliasId": "menu-a",
+        "data": "switch-to-a"
+      }
+    },
+    {
+      "bounds": {
+        "x": 540,
+        "y": 0,
+        "width": 540,
+        "height": 1080
+      },
+      "action": {
+        "type": "richmenuswitch",
+        "richMenuAliasId": "menu-b",
+        "data": "switch-to-b"
+      }
+    }
+  ]
+} 

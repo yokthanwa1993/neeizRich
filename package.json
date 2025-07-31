@@ -1,0 +1,38 @@
+{
+  "name": "neeizRich",
+  "version": "1.0.0",
+  "description": "LINE Rich Menu 2-tab switcher using Node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js serve",
+    "create": "node scripts/create-richmenus.js",
+    "upload": "node scripts/upload-images.js",
+    "link": "node scripts/link-to-user.js",
+    "cleanup": "node scripts/cleanup.js",
+    "test": "node scripts/test-richmenu.js",
+    "deploy": "node scripts/create-richmenus.js && node scripts/upload-images.js && node scripts/link-to-user.js",
+    "samples": "node scripts/create-sample-images.js",
+    "simple": "node scripts/create-simple-images.js"
+  },
+  "keywords": [
+    "line",
+    "messaging-api",
+    "richmenu",
+    "nodejs",
+    "caprover"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "form-data": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
