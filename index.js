@@ -53,10 +53,11 @@ async function main() {
             
             const events = req.body.events || [];
             
-            events.forEach(event => {
+            events.forEach(async (event) => {
                 if (event.type === 'message') {
                     const userId = event.source.userId;
                     const message = event.message.text;
+                    const replyToken = event.replyToken;
                     
                     console.log('\n🎯 ข้อมูลที่ได้รับ:');
                     console.log('📱 User ID:', userId);
@@ -77,11 +78,44 @@ async function main() {
                     } catch (error) {
                         console.error('❌ ไม่สามารถบันทึกไฟล์ได้:', error.message);
                     }
+                    
+                    // ส่งข้อความตอบกลับพร้อม User ID
+                    await replyMessage(replyToken, `🎯 User ID ของคุณคือ:\n${userId}\n\n📝 ข้อความ: ${message}\n⏰ เวลา: ${new Date().toLocaleString('th-TH')}`);
                 }
             });
             
             res.status(200).send('OK');
         });
+
+        // ฟังก์ชันส่งข้อความตอบกลับ
+        async function replyMessage(replyToken, message) {
+            const axios = require('axios');
+            require('dotenv').config({ path: './config/config.env' });
+            const token = process.env.CHANNEL_ACCESS_TOKEN;
+            
+            if (!token || token === 'your_channel_access_token_here') {
+                console.error('❌ ไม่พบ CHANNEL_ACCESS_TOKEN');
+                return;
+            }
+            
+            try {
+                await axios.post('https://api.line.me/v2/bot/message/reply', {
+                    replyToken: replyToken,
+                    messages: [{
+                        type: 'text',
+                        text: message
+                    }]
+                }, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                console.log('✅ ส่งข้อความตอบกลับสำเร็จ');
+            } catch (error) {
+                console.error('❌ ไม่สามารถส่งข้อความตอบกลับได้:', error.response?.data || error.message);
+            }
+        }
 
         // API endpoints
         app.get('/api/status', (req, res) => {
