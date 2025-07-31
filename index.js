@@ -21,7 +21,9 @@ async function main() {
         const app = express();
         const PORT = process.env.PORT || 3000;
         
-        app.use(express.json());
+        app.use(express.json({ verify: (req, res, buf) => {
+            req.rawBody = buf;
+        }}));
         app.use(express.static('public'));
         
         // Health check endpoint
@@ -29,6 +31,58 @@ async function main() {
             res.json({ status: 'OK', timestamp: new Date().toISOString() });
         });
         
+        // Webhook endpoint
+        app.post('/webhook', (req, res) => {
+            console.log('📨 ได้รับ webhook event...');
+            
+            // ตรวจสอบ signature
+            const crypto = require('crypto');
+            const signature = req.headers['x-line-signature'];
+            const channelSecret = process.env.CHANNEL_SECRET || 'your_channel_secret_here';
+            
+            if (req.rawBody && channelSecret !== 'your_channel_secret_here') {
+                const hash = crypto.createHmac('SHA256', channelSecret)
+                    .update(req.rawBody)
+                    .digest('base64');
+                
+                if (signature !== hash) {
+                    console.log('❌ Invalid signature');
+                    return res.status(401).send('Unauthorized');
+                }
+            }
+            
+            const events = req.body.events || [];
+            
+            events.forEach(event => {
+                if (event.type === 'message') {
+                    const userId = event.source.userId;
+                    const message = event.message.text;
+                    
+                    console.log('\n🎯 ข้อมูลที่ได้รับ:');
+                    console.log('📱 User ID:', userId);
+                    console.log('💬 Message:', message);
+                    console.log('📅 Timestamp:', new Date(event.timestamp).toLocaleString());
+                    
+                    // บันทึก User ID ลงไฟล์
+                    const fs = require('fs');
+                    const userData = {
+                        userId: userId,
+                        message: message,
+                        timestamp: new Date(event.timestamp).toISOString()
+                    };
+                    
+                    try {
+                        fs.writeFileSync('./user-id.json', JSON.stringify(userData, null, 2));
+                        console.log('💾 บันทึก User ID ลงไฟล์ user-id.json แล้ว');
+                    } catch (error) {
+                        console.error('❌ ไม่สามารถบันทึกไฟล์ได้:', error.message);
+                    }
+                }
+            });
+            
+            res.status(200).send('OK');
+        });
+
         // API endpoints
         app.get('/api/status', (req, res) => {
             res.json({
