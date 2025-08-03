@@ -15,6 +15,8 @@ app.post('/webhook', async (req, res) => {
     for (const event of events) {
       if (event.type === 'postback') {
         await handlePostback(event);
+      } else if (event.type === 'message' && event.message.type === 'text') {
+        await handleMessage(event);
       }
     }
     
@@ -78,6 +80,23 @@ async function handlePostback(event) {
     
     await lineAPI.client.post('/message/push', quickReplyMessage);
   }
+}
+
+async function handleMessage(event) {
+  const userId = event.source.userId;
+  const replyToken = event.replyToken;
+  
+  const replyMessage = {
+    replyToken: replyToken,
+    messages: [
+      {
+        type: "text",
+        text: `User ID: ${userId}\nLIFF URL: https://liff.line.me/2007840854-rKv5DGlD`
+      }
+    ]
+  };
+
+  await lineAPI.client.post('/message/reply', replyMessage);
 }
 
 const PORT = process.env.PORT || 3000;
