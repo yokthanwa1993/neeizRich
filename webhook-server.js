@@ -27,6 +27,7 @@ app.post('/webhook', async (req, res) => {
 
 async function handlePostback(event) {
   const userId = event.source.userId;
+  console.log(`Received postback data:`, JSON.stringify(event.postback, null, 2));
   const data = event.postback.data;
   
   console.log(`Postback: ${data} from user: ${userId}`);
