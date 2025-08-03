@@ -2,17 +2,12 @@
   "name": "neeizRich",
   "version": "1.0.0",
   "description": "LINE Rich Menu 2-tab switcher using Node.js",
-  "main": "index.js",
+  "main": "webhook-server.js",
   "scripts": {
-    "start": "node index.js serve",
-    "create": "node scripts/create-richmenus.js",
-    "upload": "node scripts/upload-images.js",
-    "link": "node scripts/link-to-user.js",
-    "cleanup": "node scripts/cleanup.js",
-    "test": "node scripts/test-richmenu.js",
-    "deploy": "node scripts/create-richmenus.js && node scripts/upload-images.js && node scripts/link-to-user.js",
-    "samples": "node scripts/create-sample-images.js",
-    "simple": "node scripts/create-simple-images.js",
+    "start": "node webhook-server.js",
+    "dev": "nodemon webhook-server.js",
+    "upload-menus": "node scripts/upload-both-menus.js",
+    "clear-all": "node scripts/clear-all.js",
     "webhook": "node webhook-server.js"
   },
   "keywords": [
@@ -31,7 +26,8 @@
     "form-data": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "sharp": "^0.34.3"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,0 +1,23 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": false,
+  "name": "Delivery Menu",
+  "chatBarText": "กลับหน้าหลัก",
+  "areas": [
+    {
+      "bounds": { "x": 50, "y": 50, "width": 300, "height": 100 },
+      "action": { "type": "richmenuswitch", "richMenuAliasId": "main-menu", "data": "back-to-main" }
+    },
+    {
+      "bounds": { "x": 0, "y": 843, "width": 1250, "height": 843 },
+      "action": { "type": "uri", "uri": "https://foodpanda.co.th" }
+    },
+    {
+      "bounds": { "x": 1250, "y": 843, "width": 1250, "height": 843 },
+      "action": { "type": "uri", "uri": "https://grab.com/th" }
+    }
+  ]
+}

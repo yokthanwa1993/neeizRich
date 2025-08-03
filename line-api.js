@@ -4,7 +4,7 @@
  */
 
 const axios = require('axios');
-require('dotenv').config({ path: './config/config.env' });
+require('dotenv').config();
 
 class LineAPI {
     constructor() {
@@ -13,7 +13,7 @@ class LineAPI {
         this.token = process.env.CHANNEL_ACCESS_TOKEN;
         
         if (!this.token || this.token === 'your_channel_access_token_here') {
-            throw new Error('กรุณาตั้งค่า CHANNEL_ACCESS_TOKEN ใน config/config.env');
+            throw new Error('กรุณาตั้งค่า CHANNEL_ACCESS_TOKEN ใน .env');
         }
         
         this.client = axios.create({
