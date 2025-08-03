@@ -32,7 +32,10 @@ async function handlePostback(event) {
   console.log(`Postback: ${data} from user: ${userId}`);
   
   if (data === 'switch-to-delivery') {
-    // ส่ง Quick Reply เมื่อเปลี่ยนไป delivery menu
+    // 1. สลับไป Rich Menu ของเดลิเวอรี่
+    await lineAPI.linkRichMenuToUser(userId, 'delivery-menu');
+    
+    // 2. ส่ง Quick Reply เมื่อเปลี่ยนไป delivery menu
     const quickReplyMessage = {
       to: userId,
       messages: [

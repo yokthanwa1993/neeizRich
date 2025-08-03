@@ -17,7 +17,7 @@
     },
     {
       "bounds": { "x": 1667, "y": 843, "width": 833, "height": 843 },
-      "action": { "type": "richmenuswitch", "richMenuAliasId": "delivery-menu", "data": "switch-to-delivery" }
+      "action": { "type": "postback", "data": "switch-to-delivery" }
     }
   ]
 }
